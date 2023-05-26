@@ -19,7 +19,65 @@ int **crearMatriz()
         {
             // Se le asignan números aleatorios entre el 0 y el 100 a la matriz
             estudiantesCarreraSemestre[i][j] = rand() % 101;
-            
+        }
+    }
+
+    return estudiantesCarreraSemestre;
+}
+
+// Función creada para imprimir la matriz
+void imprimirMatriz(int **estudiantesCarreraSemestre)
+{
+    printf("             ");
+    for (int i = 0; i < 7; i++)
+    {
+        switch (i)
+        {
+        case 0:
+            printf("IS");
+            break;
+
+        case 1:
+            printf("Ad");
+            break;
+        
+        case 2:
+            printf("Ec");
+            break;
+
+        case 3:
+            printf("RI");
+            break;
+        
+        case 4:
+            printf("Ma");
+            break;
+        
+        case 5:
+            printf("Co");
+            break;
+
+        case 6:
+            printf("II");
+            break;
+
+        default:
+            break;
+        }
+        printf("   ");
+    }
+    printf("\n");
+
+    for (int i = 0; i < 10; i++)
+    {
+        printf("Semestre %i: ", i + 1);
+        if (i < 9) {
+            printf(" ");
+        }
+
+        for (int j = 0; j < 7; j++)
+        {
+
             // Se imprime la matriz. Los condicionales le dan formato, para que se vea más estético. Al usar la terminal una fuente monoespaciada, se pueden colocar espacios para que los elementos queden separados en una forma similar a una cuadrícula
             printf("%i  ", estudiantesCarreraSemestre[i][j]);
 
@@ -34,8 +92,6 @@ int **crearMatriz()
         }
         printf("\n");
     }
-
-    return estudiantesCarreraSemestre;
 }
 
 // Función que obtiene la cantidad de estudiantes ingresados por año
@@ -50,7 +106,7 @@ int *numeroDeEstudiantesPorAnio(int **matrizEstudiantes)
         // La variable del segundo ciclo define los semestres por los que se va a iterar. Se define como 2 * el iterador k, y tiene que ser menor 2 * (k + 1), de tal forma que itere por todos los semestres por separado, en función del año.
         for (int i = 2 * k; i < 2 * (k + 1); i++)
         {
-            //La variable del tercer ciclo se usa para iterar por las carreras.
+            // La variable del tercer ciclo se usa para iterar por las carreras.
             for (int j = 0; j < 7; j++)
             {
                 // Se le suma a numeroDeEstudiantes cada estudiante en los respectivos años.
@@ -183,10 +239,13 @@ int main()
 {
     // Se asigna una semilla aleatoria
     srand(time(NULL));
-    
+
     // Se crea la matriz con estudiantes por semestre y carrera
     int **matrizEstudiantes = crearMatriz();
-    
+
+    // Se imprime la matriz
+    imprimirMatriz(matrizEstudiantes);
+
     // Inciso a: El año en que ingresó la mayor cantidad de alumnos de la universidad.
     imprimirCantidadEstudiantesPorAnio(matrizEstudiantes);
 
