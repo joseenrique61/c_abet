@@ -28,6 +28,7 @@ int **crearMatriz()
 // Función creada para imprimir la matriz
 void imprimirMatriz(int **estudiantesCarreraSemestre)
 {
+    // Se imprimen las carreras, con el formato ya aplicado.
     printf("             ");
     for (int i = 0; i < 7; i++)
     {
@@ -68,6 +69,7 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
     }
     printf("\n");
 
+    // Se imprime la matriz. Los condicionales le dan formato, para que se vea más estético. Al usar la terminal una fuente monoespaciada, se pueden colocar espacios para que los elementos queden separados en una forma similar a una cuadrícula
     for (int i = 0; i < 10; i++)
     {
         printf("Semestre %i: ", i + 1);
@@ -78,7 +80,6 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
         for (int j = 0; j < 7; j++)
         {
 
-            // Se imprime la matriz. Los condicionales le dan formato, para que se vea más estético. Al usar la terminal una fuente monoespaciada, se pueden colocar espacios para que los elementos queden separados en una forma similar a una cuadrícula
             printf("%i  ", estudiantesCarreraSemestre[i][j]);
 
             if (estudiantesCarreraSemestre[i][j] >= 10 && estudiantesCarreraSemestre[i][j] < 100)
