@@ -41,7 +41,7 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
         case 1:
             printf("Ad");
             break;
-        
+
         case 2:
             printf("Ec");
             break;
@@ -49,11 +49,11 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
         case 3:
             printf("RI");
             break;
-        
+
         case 4:
             printf("Ma");
             break;
-        
+
         case 5:
             printf("Co");
             break;
@@ -73,7 +73,8 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
     for (int i = 0; i < 10; i++)
     {
         printf("Semestre %i: ", i + 1);
-        if (i < 9) {
+        if (i < 9)
+        {
             printf(" ");
         }
 
@@ -96,44 +97,42 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
 }
 
 // Función que obtiene la cantidad de estudiantes ingresados por año
-int *numeroDeEstudiantesPorAnio(int **matrizEstudiantes)
+int anioMayorIngreso(int **matrizEstudiantes)
 {
-    // Se define un arreglo de 5 espacios, inicializado en ceros
-    int *numeroDeEstudiantes = calloc(5, sizeof(int));
+    int mayor = 0;
+    int mayorIndice = 0;
 
-    // La variable del primer ciclo se usa para asignar valores a la matriz numeroDeEstudiantes. Representa los años.
+    // La variable del primer ciclo se usa para definir la variable del segundo ciclo y asignar el mayorIndice. Representa los años.
     for (int k = 0; k < 5; k++)
     {
-        // La variable del segundo ciclo define los semestres por los que se va a iterar. Se define como 2 * el iterador k, y tiene que ser menor 2 * (k + 1), de tal forma que itere por todos los semestres por separado, en función del año.
+        int suma = 0;
+        // La variable del segundo ciclo define los semestres por los que se va a iterar. Se define como 2 * el iterador k, y tiene que ser menor que 2 * (k + 1), de tal forma que itere por todos los semestres por separado, en función del año.
         for (int i = 2 * k; i < 2 * (k + 1); i++)
         {
             // La variable del tercer ciclo se usa para iterar por las carreras.
             for (int j = 0; j < 7; j++)
             {
-                // Se le suma a numeroDeEstudiantes cada estudiante en los respectivos años.
-                numeroDeEstudiantes[k] += matrizEstudiantes[i][j];
+                // Se suma la cantidad de estudiantes por año.
+                suma += matrizEstudiantes[i][j];
             }
+        }
+        
+        // Se evalúa si la suma de los semestres es mayor a la variable "mayor", si es así, se le asigna su valor a la variable, y el año actual a mayorIndice.
+        if (suma > mayor)
+        {
+            mayor = suma;
+            mayorIndice = k;
         }
     }
 
-    return numeroDeEstudiantes;
+    return mayorIndice;
 }
 
-// Función que imprime la cantidad de estudiantes ingresados por año
+// Función que imprime el año con mayor ingreso de todas las carreras
 void imprimirCantidadEstudiantesPorAnio(int **matrizEstudiantes)
 {
-    printf("\nNumero de estudiantes ingresados por anio: \n");
-
-    int *numeroEstudiantesPorAnio = numeroDeEstudiantesPorAnio(matrizEstudiantes);
-
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Anio %i: %i\n", i + 1, numeroEstudiantesPorAnio[i]);
-    }
-    printf("\n");
-
-    // Se libera la memoria ocupada por numeroEstudiantesPorAño
-    free(numeroEstudiantesPorAnio);
+    int mayor = anioMayorIngreso(matrizEstudiantes);
+    printf("\nAnio con mayor ingreso de estudiantes: %i\n\n", mayor + 1);
 }
 
 // Función que obtiene la carrera con la mayor cantidad de estudiantes ingresados en el último año
@@ -144,10 +143,12 @@ int mayorCantidadUltimoAnio(int **matrizEstudiantes)
 
     for (int i = 0; i < 7; i++)
     {
-        // Se itera por todas las carreras en el último año, y se le asigna su índice a la variable mayorIndice, para obtener la carrera con mayor ingreso.
-        if (matrizEstudiantes[9][i] > mayor)
+        // Se define la variable suma, que tiene la suma de estudiantes de cada carrera en los últimos dos semestres, para obtener los estudiantes por año de la carrera.
+        int suma = matrizEstudiantes[8][i] + matrizEstudiantes[9][i];
+
+        if (suma > mayor)
         {
-            mayor = matrizEstudiantes[9][i];
+            mayor = suma;
             mayorIndice = i;
         }
     }
@@ -202,27 +203,22 @@ int anioMayorCantidadSoftware(int **matrizEstudiantes)
 {
     int mayor = 0;
     int mayorIndice = 0;
+    int suma = 0;
 
-    for (int i = 0; i < 10; i++)
+    // La variable del primer ciclo se usa para definir la variable del segundo ciclo, y para asignar el mayorIndice. Representa los años.
+    for (int k = 0; k < 5; k++)
     {
-        // Se itera por los semestres en la primera carrera (Ing. Software), y se asigna el índice del mayor para obtener el semestre de mayor ingreso.
-        if (matrizEstudiantes[i][0] > mayor)
+        for (int i = 2 * k; i < 2 * (k + 1); i++)
         {
-            mayor = matrizEstudiantes[i][0];
-            mayorIndice = i;
+            suma += matrizEstudiantes[i][0];
         }
-    }
 
-    // Se calcula el año respectivo al semestre y se retorna
-    mayorIndice++;
-
-    if (mayorIndice % 2 == 0)
-    {
-        mayorIndice /= 2;
-    }
-    else
-    {
-        mayorIndice = (mayorIndice / 2) + 1;
+        // Se evalúa si la suma de los semestres es mayor a la variable "mayor", si es así, se le asigna su valor a la variable, y el año actual a mayorIndice.
+        if (suma > mayor)
+        {
+            mayor = suma;
+            mayorIndice = k;
+        }
     }
 
     return mayorIndice;
