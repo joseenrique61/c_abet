@@ -96,7 +96,7 @@ void imprimirMatriz(int **estudiantesCarreraSemestre)
     }
 }
 
-// Función que obtiene la cantidad de estudiantes ingresados por año
+// Función que obtiene el año con mayor ingreso de todas las carreras
 int anioMayorIngreso(int **matrizEstudiantes)
 {
     int mayor = 0;
@@ -129,7 +129,7 @@ int anioMayorIngreso(int **matrizEstudiantes)
 }
 
 // Función que imprime el año con mayor ingreso de todas las carreras
-void imprimirCantidadEstudiantesPorAnio(int **matrizEstudiantes)
+void imprimirAnioMayorIngreso(int **matrizEstudiantes)
 {
     int mayor = anioMayorIngreso(matrizEstudiantes);
     printf("\nAnio con mayor ingreso de estudiantes: %i\n\n", mayor + 1);
@@ -244,7 +244,7 @@ int main()
     imprimirMatriz(matrizEstudiantes);
 
     // Inciso a: El año en que ingresó la mayor cantidad de alumnos de la universidad.
-    imprimirCantidadEstudiantesPorAnio(matrizEstudiantes);
+    imprimirAnioMayorIngreso(matrizEstudiantes);
 
     // Inciso b: La carrera que recibió la mayor cantidad de alumnos en el último año.
     imprimirMayorCantidadUltimoAnio(matrizEstudiantes);
