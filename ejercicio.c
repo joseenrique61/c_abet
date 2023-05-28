@@ -203,11 +203,11 @@ int anioMayorCantidadSoftware(int **matrizEstudiantes)
 {
     int mayor = 0;
     int mayorIndice = 0;
-    int suma = 0;
 
     // La variable del primer ciclo se usa para definir la variable del segundo ciclo, y para asignar el mayorIndice. Representa los años.
     for (int k = 0; k < 5; k++)
     {
+        int suma = 0;
         for (int i = 2 * k; i < 2 * (k + 1); i++)
         {
             suma += matrizEstudiantes[i][0];
@@ -229,7 +229,7 @@ void imprimirAnioMayorCantidadSoftware(int **matrizEstudiantes)
 {
     int mayor = anioMayorCantidadSoftware(matrizEstudiantes);
 
-    printf("El anio con mayor cantidad de estudiantes en Ingenieria en Software es: %i\n", mayor);
+    printf("El anio con mayor cantidad de estudiantes en Ingenieria en Software es: %i\n", mayor + 1);
 }
 
 int main()
